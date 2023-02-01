@@ -7,38 +7,36 @@ import (
 
 var randSource = rand.NewSource(time.Now().UnixNano())
 var randGenerator = rand.New(randSource)
-var currMonsterHealth = 100
-var currPlayerHealth = 100
+var currMonsterHealth = MONSTERER_HEALTH
+var currPlayerHealth = PLAYER_HEALTH
 
 func AttackMonster(IsSpecialAttack bool) {
-	minAttackVal := 5
-	maxAttackVal := 10
+	minAttackVal := PLAYER_ATTACK_MIN_DMG
+	maxAttackVal := PLAYER_ATTACK_MAX_DMG
 
 	if IsSpecialAttack {
-		minAttackVal = 10
-		maxAttackVal = 20
+		minAttackVal = PLAYER_SPECIAL_ATTACK_MIN_DMG
+		maxAttackVal = PLAYER_SPECIAL_ATTACK_MAX_DMG
 	}
 	dmgVal := generateRandBetween(minAttackVal, maxAttackVal)
 	currMonsterHealth -= dmgVal
 }
 
 func HealPlayer() {
-	minhealkVal := 10
-	maxhealkVal := 20
 
-	healVal := generateRandBetween(minhealkVal, maxhealkVal)
-	healthDiff := 100 - currPlayerHealth
+	healVal := generateRandBetween(PLAYER_HEAL_MIN_VAL, PLAYER_HEAL_MAX_VAL)
+	healthDiff := PLAYER_HEALTH - currPlayerHealth
 
 	if healthDiff >= healVal {
 		currPlayerHealth += healVal
 	} else {
-		currPlayerHealth = 100
+		currPlayerHealth = PLAYER_HEALTH
 	}
 }
 
 func AttackPlayer() {
-	minAttackVal := 8
-	maxAttackVal := 15
+	minAttackVal := MONSTER_ATTACK_MIN_DMG
+	maxAttackVal := MONSTER_ATTACK_MAX_DMG
 
 	dmgVal := generateRandBetween(minAttackVal, maxAttackVal)
 	currMonsterHealth -= dmgVal

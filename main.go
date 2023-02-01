@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/mrkouhadi/go-monsterSlayer/interactions"
 )
 
@@ -28,7 +26,13 @@ func ExecuteRound() string { // will return "Player" || "Monster" || "" for winn
 	interactions.ShowAvailableActions(isSpecialRound)
 	userChoice := interactions.GetPlayerChoice(isSpecialRound)
 
-	fmt.Println(userChoice)
+	if userChoice == "ATTACK" {
+
+	} else if userChoice == "HEAL" {
+
+	} else {
+
+	}
 	return ""
 }
 
