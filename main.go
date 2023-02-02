@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/mrkouhadi/go-monsterSlayer/actions"
 	"github.com/mrkouhadi/go-monsterSlayer/interactions"
 )
 
@@ -27,12 +28,14 @@ func ExecuteRound() string { // will return "Player" || "Monster" || "" for winn
 	userChoice := interactions.GetPlayerChoice(isSpecialRound)
 
 	if userChoice == "ATTACK" {
-
+		actions.AttackMonster(false)
 	} else if userChoice == "HEAL" {
-
+		actions.HealPlayer()
 	} else {
-
+		actions.AttackMonster(true)
 	}
+
+	actions.AttackPlayer()
 	return ""
 }
 
