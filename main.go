@@ -14,7 +14,7 @@ func main() {
 	for winner == "" {
 		winner = ExecuteRound()
 	}
-	Endgame()
+	Endgame(winner)
 }
 
 func StartGame() {
@@ -27,6 +27,9 @@ func ExecuteRound() string { // will return "Player" || "Monster" || "" for winn
 	interactions.ShowAvailableActions(isSpecialRound)
 	userChoice := interactions.GetPlayerChoice(isSpecialRound)
 
+	var playerHealth int
+	var monsterHealth int
+
 	if userChoice == "ATTACK" {
 		actions.AttackMonster(false)
 	} else if userChoice == "HEAL" {
@@ -34,11 +37,17 @@ func ExecuteRound() string { // will return "Player" || "Monster" || "" for winn
 	} else {
 		actions.AttackMonster(true)
 	}
-
 	actions.AttackPlayer()
+	playerHealth, monsterHealth = actions.GetHealthAmounts()
+
+	if playerHealth <= 0 {
+		return "Monster"
+	} else if monsterHealth <= 0 {
+		return "Player"
+	}
 	return ""
 }
 
-func Endgame() {
-
+func Endgame(w string) {
+	interactions.DeclareWinner(w)
 }
