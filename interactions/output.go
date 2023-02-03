@@ -48,5 +48,8 @@ func ShowRoundStatistics(Rdata *RoundData) {
 	fmt.Printf("Monster Attacked Player for %v damage. \n", Rdata.MonsterAttackDmg)
 	fmt.Printf("Player's health: %v \n", Rdata.PlayerHealth)
 	fmt.Printf("Monster's health: %v \n", Rdata.MonsterHealth)
+}
+
+func WriteDataIntoFile(data *[]RoundData) {
 
 }
