@@ -1,6 +1,9 @@
 package interactions
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 type RoundData struct {
 	Action           string
@@ -50,6 +53,30 @@ func ShowRoundStatistics(Rdata *RoundData) {
 	fmt.Printf("Monster's health: %v \n", Rdata.MonsterHealth)
 }
 
-func WriteDataIntoFile(data *[]RoundData) {
+func WriteDataIntoFile(rounds *[]RoundData) {
+	file, err := os.Create("gameLog.txt")
+	if err != nil {
+		fmt.Println("Failed to Store Data in the log File.")
+		return
+	}
+	for i, val := range *rounds {
 
+		data := map[string]string{
+			"Round":                 fmt.Sprint(i + 1),
+			"Action":                val.Action,
+			"Player Attack Damage":  fmt.Sprint(val.PlayerAttackDmg), // convert int to string
+			"Player Heal Value":     fmt.Sprint(val.PlayerHealValue),
+			"Monster Attack Damage": fmt.Sprint(val.MonsterAttackDmg),
+			"Player Health":         fmt.Sprint(val.PlayerHealth),
+			"Monster Health":        fmt.Sprint(val.MonsterHealth),
+		}
+		logEntry := fmt.Sprintln(data)
+		_, err := file.WriteString(logEntry)
+		if err != nil {
+			fmt.Println("Failed to Store This round data to the LOG File.")
+			continue
+		}
+	}
+	file.Close()
+	fmt.Println("Data of all round have been store to the LOG File.")
 }
