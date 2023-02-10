@@ -5,4 +5,4 @@
 ### scripts
 
 - for development : `go run main.go`
-- for building astandalone program : `go build`
+- for building a standalone program : `go build`
