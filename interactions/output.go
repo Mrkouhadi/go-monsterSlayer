@@ -3,6 +3,7 @@ package interactions
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/common-nighthawk/go-figure"
 )
@@ -63,7 +64,18 @@ func ShowRoundStatistics(Rdata *RoundData) {
 }
 
 func WriteDataIntoFile(rounds *[]RoundData) {
-	file, err := os.Create("gameLog.txt")
+	// when making an excutable program, we need to get the path where is the program is located
+	expPath, err := os.Executable()
+	if err != nil {
+		fmt.Println("Could not get the path ofthe executable program ! ")
+		return
+	}
+	expPath = filepath.Dir(expPath)
+	file, err := os.Create(expPath + "/gameLog.txt")
+	// to test this code (development mode) we need to comment out the code above and
+	// uncomment the line of code below and then "go run main.go"
+	// file, err := os.Create("gameLog.txt")
+
 	if err != nil {
 		fmt.Println("Failed to Store Data in the log File.")
 		return
