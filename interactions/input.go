@@ -10,7 +10,7 @@ import (
 var reader = bufio.NewReader(os.Stdin)
 
 func GetPlayerChoice(specialAttackIsAvailable bool) string {
-	for { // or for true {}... we keep asking for the player choice until we get wht we want
+	for { // or   for true {}   ... we keep asking for the player choice until we get what we want
 		PlayerChoice, _ := getInputData()
 		if PlayerChoice == "1" {
 			return "ATTACK"
